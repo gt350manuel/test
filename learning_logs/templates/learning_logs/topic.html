@@ -1,0 +1,37 @@
+ <!-- Topic Template shows all the entries related with a single Topic -->
+{% extends 'learning_logs/base.html' %} <!-- inherites from base template  -->
+ <!-- Page for a single topic and its entries -->
+{% block page_header %}
+ <h3> {{ topic }}</h3>
+{% endblock page_header %}
+
+{% block content %}
+<!-- -->
+ <!-- <p>Topic: {{ topic }} </p>  Shows the title, its a variable -->
+ 
+ <!-- <p>Entries: </p> -->
+ <h5>
+  <a href="{% url 'learning_logs:new_entry' topic.id %}"> Add new entry </a>
+ </h5>
+  
+  
+  {% for entry in entries %}
+   <div class="card mb-3"><!--insted of a unorder list, we create a div class with a selector card, it has two nested elements-->
+	<h4 class="card-header"><!-- it´s a card header h4 element, this one holds the timestamp an link to edit entry-->
+     {{ entry.date_added|date:'M d, Y H:i' }}
+     <small><a href="{% url 'learning_logs:edit_entry' entry.id%}"> Edit entry</a></small><!-- small tag makes it look smaller tan the timestamp -->
+    </h4>
+   
+    <div class="card-body"> <!--it´s a dive qith the selector card-body, places the text of the entry in a simple box on the card -->
+     {{ entry.text|linebreaks }}
+     <!-- the caracter: | is a template filter to give format -->
+    </div>
+   </div>
+
+  {% empty %}
+   <p> There are no entries for this topic yet.</p>
+  {% endfor %}
+ 
+{% endblock content %}
+
+   

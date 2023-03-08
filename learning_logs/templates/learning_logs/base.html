@@ -1,0 +1,76 @@
+{% load bootstrap4 %}<!-- load the collection of templates available on django-bootstrap4  -->
+
+<!doctype html><!-- declared as HTML document  -->
+<html lang="en"> <!-- written in english -->
+<head><!-- the head tells the browser what it needs to know to display the page correctly -->
+ <meta charset="utf-8">
+ <meta name= "viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <title> Learning Log</title><!-- it will be display in the browser´s title bar -->
+	
+ {% bootstrap_css %}<!-- we use one of the django-bootstrap4´s custom template tags, which tells django to include all the boostrap style files.  -->
+ {% bootstrap_javascript jquery='full' %}<!-- enables all the interactive behavior you might use on the page -->
+	
+
+</head> <!--closing head tag  -->
+
+<body><!-- openning body tag, conteins the content users will see on a page.-->
+	
+ <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border"> <!-- nav element indicates the page´s navigation links section -->
+		<!-- Everything is style acording bootstrap rules by selectors: navbar, navbar-expand-md, they tell which elements on a page a certain style rules applies to -->
+		<!-- navbar-light and bg-light selectors style the navigation bar with a light-themed backgroud -->
+		<!-- mb in mb-4 is short for margin-bottom, makes appear a little space between the navigation bar and the rest of the page -->
+		<!-- border selector provides a thin border around the light background.-->
+  <a class="navbar-brand" href="{% url 'learning_logs:index'%}"> Learning_log </a><!-- we set project´s name to appear at the far left of the navigation bar, is a link to home page -->
+		<!-- it will appear on every page in the project -->
+		<!-- the navbar-brand selector styles this link so it stands out -->
+		
+	<!-- Botton that appears if the browser is to narrow, to display the whole bar -->
+  <button class ="navbat-toggler" type="button" data-toggle="collapse"
+    data-target="#navbarCollapse" aria-controls="navbarCollapse"
+	aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span></button>
+		<!-- the collapse reference causes the navigation bar to collpase whe the user shrinks the browser window or when the site is display on a mobile device. -->
+		
+		<!-- This is the begining of the navigation bar that will collapse  -->
+  <div class="collapse navbar-collapse" id="navbarCollapse"><!-- div is short for division, a div class styles everthing inside it -->
+	  <!--this is the part that will be collapsed -->
+   <ul class="navbar-nav mr-auto"><!--bootstrap defines every navigation element as an item  -->
+	<li class="nav-item">
+	<a class="nav-link" href="{% url 'learning_logs:topics' %}"> Topics </a></li>
+   </ul>
+	 
+   <ul class="navbar-nav ml-auto"><!-- another item, you can have many as you want, ml-auto is short for margin-left-automatic creates a margin 
+	   that pushes the element to the left of the screen -->
+    {% if user.is_authenticated %}
+	 <li class="nav-item">
+	  <span class="navbar-text">Hello {{ user.username }}. </span><!-- span styles pieces of text, or elements of a page -->
+	 </li>
+	 <li class="nav-item">
+	  <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+	 </li>
+	{% else %}
+	 <li class="nav-item">
+	  <a class="nav-link" href="{% url 'users:register' %}"> Register</a>
+	 </li>
+	 <li class="nav-item">
+	   <a class="nav-link" href="{% url 'users:login' %}"> Login </a></li>
+	{% endif %}
+   </ul>
+  </div>
+ </nav>
+   
+<!--Main Part of the Page  -->
+ <main role="main" class="container"><!--here we assing the bootstrap selector conteiner a simple way to group elements on a page -->
+  <div class="pb-2 mb-2 border-bottom"><!-- contains a page header, styles with a bottom margin, -->
+   {% block page_header %}{% endblock page_header %}<!-- we are gonna put the tittle of the page here -->
+  </div>
+  <div>
+   {% block content %}{% endblock content %}
+  </div>
+ </main>
+</body>
+</html>
+	 
+	 
+	 
+	 

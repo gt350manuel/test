@@ -1,0 +1,20 @@
+{% extends "learning_logs/base.html" %}
+
+{% block page_header %}<!--This is the main part of the page, here goes the tittle, and itroducction -->
+<img src="challenger.jpg" class="img-fluid" alt="...">
+
+ <div class="jumbotron"><!--  its a div element with styling directives, its like a box, where we can put inf. inside are three elements-->
+   <h1 class="display-3"> Track your learning.  </h1><!-- h1 class is a first-level header, display-3 selector adds a thinner an taller look at this header -->
+   
+    <p class="lead"> Make your own Learning_log, and keep a list of the topics 
+		you´re learning about. Whenever you learn somethin new about a topic, make an
+		entry summarizing what you´ve learned.
+    </p> <!-- we include a large messange that provides more inf -->
+
+    <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button"> Register &raquo;</a><!-- this is a button -->
+       <!-- the &raquo are the 2 angle brackets (>>) -->
+ </div>
+
+{% endblock page_header %}
+     
+ 

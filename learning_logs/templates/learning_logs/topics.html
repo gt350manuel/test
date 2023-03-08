@@ -1,0 +1,27 @@
+{% extends "learning_logs/base.html" %}<!--inherites from base template-->
+
+{% block page_header %}
+ <h1> Topics </h1>
+{% endblock page_header %}
+
+
+{% block content %}
+
+ <!-- <p> Topics  </p> Tittle-->
+  
+ <ul><!-- bulleted list, an unorganized list -->
+  {% for topic in topics %}<!--for loop, loops through every element in topics -->
+   <li> <h4>
+	 <a href="{% url 'learning_logs:topic' topic.id %}"> {{ topic }}</a> <!-- URL template tag-->
+   </h4></li>
+   <!--prints, double braces indicates to django we are using template variables -->
+  {% empty %}<!-- if the list is empty -->
+   <li><h3>No topics have been added yet.</h3> </li>
+  {% endfor %}<!--enf for loop -->
+ </ul><!--end bulleted list  -->
+ 
+ <h3><a href="{% url 'learning_logs:new_topic' %}"> Add a new topic </a> </h3><!--link for a new topic -->
+{% endblock content %}
+
+
+

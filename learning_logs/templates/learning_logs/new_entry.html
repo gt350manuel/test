@@ -1,0 +1,26 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+  <h3> <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></h3> 
+{% endblock page_header %}
+  
+{% block content %}
+ <!-- titulo con link a la pagina del tema actual, se usa topic.id para identificar ese tema, varia-->
+ <h4> Add a new Entry: </h4> 
+	 
+ <form method='post' action= "{% url 'learning_logs:new_entry' topic.id %}" class="form" ><!-- redirecciona la informacion al la funcion view -->
+  <!-- como POST request-->
+  {% csrf_token %}<!-- segurida ante ataques en el trafico de la inf-->
+  {% bootstrap_form form %}
+  <!--{{ form.as_p}}  muestra el formulario -->
+  {% buttons %}
+   <button name="submit" class="btn btn-primary"> Add Entry</button><!-- boton-->
+  {% endbuttons %}
+  
+  
+ </form>
+
+{% endblock content %}
+   
+<!-- -->

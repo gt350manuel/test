@@ -1,0 +1,30 @@
+<!-- we are using urls and views from django, still we have to create the template for login in-->
+<!-- a templeta in one app can inherit from another app-->
+{% extends "learning_logs/base.html" %}<!--inherites from learning_logs app -->
+{% load bootstrap4 %}
+
+{% block page_header %}
+ <h2>Log in to your account. </h2>
+{% endblock page_header %}
+
+{% block content %}
+ <!--the next code was used before styling the page django bootstraps4 manages the form erros automatically -->
+ <!--{% if form.errors %}check for errors in the login in try -->
+  <!--<p> Your username and password didn´t match. Please try again.</p>display an error message -->
+ <!--{% endif %} -->
+ <!-- -->
+ 
+ 
+ <form method= "post" action = "{% url 'users:login' %}" class="form"><!-- back to the login view,and it send a template we need to display -->
+  {% csrf_token %}
+  {% bootstrap_form form %}<!-- replace the next line of code with this one wen using bootstrap -->
+  <!--{{ form.as_p }}-->
+  {% buttons %}
+   <button name="submit" class="btn btn-primary">Log in</button>
+  {% endbuttons %}
+   
+  <input type = "hidden" name="next" value="{% url 'learning_logs:index' %}" /> <!-- tells dijango where to redirect 
+   the user when logged in succesfully, in this case back to homepage-->
+ </form>
+  
+{% endblock content %}
